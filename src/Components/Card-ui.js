@@ -17,7 +17,7 @@ class Card extends Component {
         <div className="card-content">
           <div>
             Item: {item.name}
-            <span className="delete-from-card" onClick={() => this.props.deleteItem(item.id)}>-</span>
+            <span className="delete-from-card" onClick={() => this.props.deleteItem(item.id)}><i class="fa fa-trash-alt"></i></span>
           </div>
           <div>Price: {item.price + item.currency}</div>
         </div>

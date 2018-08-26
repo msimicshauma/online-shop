@@ -77,7 +77,7 @@ ul {
   justify-content: space-around;
   position: relative;
 
-  box-shadow: 0px 0px 1px 1px var(--main-theme);
+  box-shadow: 0px 0px 1px 1px #ddd;
   background-color: #fff;
   width: 320px;
   height: 200px;
@@ -87,7 +87,7 @@ ul {
 .main-container .shop-content .products-grid .product:hover {
   transition-duration: 0.1s;
   transition-timing-function: ease-in;
-  box-shadow: 0px 0px 2px 2px var(--third-color);
+  box-shadow: 0px 0px 2px 2px #ddd;
 }
 
 .main-container .shop-content .products-grid .product img {
@@ -131,7 +131,7 @@ ul {
 
 .main-container .shop-content .card .card-content .delete-from-card {
   margin-left: 10px;
-  font-size: 30px;
+  font-size: 15px;
   color: var(--secondary-color);
   cursor: pointer;
 }
