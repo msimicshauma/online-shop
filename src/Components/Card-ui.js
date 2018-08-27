@@ -12,25 +12,29 @@ class Card extends Component {
 
   render() {
 
-    const cardContent = this.props.items.map(item => {
-      return (
-        <div className="card-content">
-          <div>
-            Item: {item.name}
-            <span className="delete-from-card" onClick={() => this.props.deleteItem(item.id)}><i class="fa fa-trash-alt"></i></span>
+    if(this.props.items.length < 1) {
+      var cardContent = <div className="card-content center">Cart is empty!</div>
+    } else {
+      cardContent = this.props.items.map(item => {
+        return (
+          <div className="card-content">
+            <div>
+              Item: {item.name}
+              <span className="delete-from-card" onClick={() => this.props.deleteItem(item.id)}><i class="fa fa-trash-alt"></i></span>
+            </div>
+            <div>Price: {item.price + item.currency}</div>
           </div>
-          <div>Price: {item.price + item.currency}</div>
-        </div>
-      );
-    });
+        );
+      });
+    }
 
-    const card = (
+    var card = (
       <div className="card">
         {cardContent}
       </div>
     );
 
-    let cartStyle = "show-hide-card";
+    var cartStyle = "show-hide-card";
     if(!this.state.showCart) cartStyle += " hidden";
 
     return (
