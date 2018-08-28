@@ -166,10 +166,18 @@ ul {
 
 .main-container .shop-content .card .card-content {
   margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid white;
+}
+
+.main-container .shop-content .card .card-content .quantity-container span {
+  padding: 0 5px;
+  cursor: pointer;
 }
 
 .main-container .shop-content .card .card-content.center {
   text-align: center;
+  border: 0;
 }
 
 .main-container .shop-content .card .card-content .delete-from-card {

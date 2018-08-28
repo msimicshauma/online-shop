@@ -12,7 +12,8 @@ class Content extends Component {
         currency: '$',
         img: "https://rimmerbros.com/ItemImages/Large/BNP1357.JPG",
         alt: 'front-wing',
-        id: 1
+        id: 1,
+        clicks: 0
       },
       {
         name: 'Carbon helmet',
@@ -20,7 +21,8 @@ class Content extends Component {
         currency: '$',
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMKDYcV9bUuhKnI9U_dsaKWzAjcyMXWAc9Zk_qCfjvuBnA5b1Z",
         alt: 'carbon-helmet',
-        id: 2
+        id: 2,
+        clicks: 0
       },
       {
         name: 'Steering wheel',
@@ -28,7 +30,8 @@ class Content extends Component {
         currency: '$',
         img: "http://www.grandprixracewear.fr/4015-thickbox_default/sparco-p300-steering-wheel.jpg",
         alt: 'steering-wheel',
-        id: 3
+        id: 3,
+        clicks: 0
       },
       {
         name: 'Dashcam',
@@ -36,7 +39,8 @@ class Content extends Component {
         currency: '$',
         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNHDpfgiGnANrj30A1TYqcOdn7VjlsRGPJGODeBvihSWhU0qlW",
         alt: 'dashcam',
-        id: 4
+        id: 4,
+        clicks: 0
       },
       {
         name: 'Bluetooth OBD',
@@ -44,7 +48,8 @@ class Content extends Component {
         currency: '$',
         img: "https://images-na.ssl-images-amazon.com/images/I/51yJnp7deML.jpg",
         alt: 'bluetooth-obd',
-        id: 5
+        id: 5,
+        clicks: 0
       },
       {
         name: 'GPS',
@@ -52,7 +57,8 @@ class Content extends Component {
         currency: '$',
         img: "https://images-na.ssl-images-amazon.com/images/I/61klgUvBOYL._SL1000_.jpg",
         alt: 'gps',
-        id: 6
+        id: 6,
+        clicks: 0
       },
       {
         name: 'Racing gloves',
@@ -60,7 +66,8 @@ class Content extends Component {
         currency: '$',
         img: "https://content.speedwaymotors.com/ProductImages/6741301_L_f2982fcb-2127-4567-8bf1-a7fb2e93310a.JPG",
         alt: 'racing-gloves',
-        id: 7
+        id: 7,
+        clicks: 0
       },
       {
         name: 'Racing shoes',
@@ -68,7 +75,8 @@ class Content extends Component {
         currency: '$',
         img: "https://content.speedwaymotors.com/ProductImages/6740127_L_3130bfbd-67d3-4bbe-a95c-83f1901e4771.jpg",
         alt: 'racing-shoes',
-        id: 8
+        id: 8,
+        clicks: 0
       },
       {
         name: 'Aluminum pedals',
@@ -76,35 +84,86 @@ class Content extends Component {
         currency: '$',
         img: "https://www.topracingshop.pl/por_pl_Nakladki-pedalow-Sparco-PIUMA-czarne-dlugi-pedal-gazu-4564_2.jpg",
         alt: 'aluminum-pedals',
-        id: 9
+        id: 9,
+        clicks: 0
       }
     ],
     shoppingCard: []
   }
 
   addItem = (item) => {
-    const shoppingCard = [...this.state.shoppingCard, item];
 
-    this.setState({
-      shoppingCard
-    })
+    item.quantity = 1;
+
+    if(item.clicks < 1) {
+      const shoppingCard = [...this.state.shoppingCard, item];
+
+      this.setState({
+        shoppingCard
+      })
+
+      item.clicks++;
+    }
+
   }
 
-  deleteItem = (id) => {
-    const shoppingCard = this.state.shoppingCard.filter(item => {
-      return item.id !== id
+  deleteItem = (item) => {
+
+    let newContent = this.state.content;
+
+    for(let i = 0; i < newContent.length; i++) {
+      if(newContent[i].id === item.id) {
+        newContent[i].clicks = 0;
+      }
+    }
+
+    const shoppingCard = this.state.shoppingCard.filter(mapItem => {
+      return mapItem.id !== item.id
     });
 
     this.setState({
-      shoppingCard
+      shoppingCard,
+      content: newContent
     })
+  }
+
+  increaseQ = (item) => {
+    const newQuantity = item.quantity + 1;
+    let newCard = this.state.shoppingCard;
+
+    for(let i = 0; i < newCard.length; i++) {
+      if(newCard[i].id === item.id) {
+        newCard[i].quantity = newQuantity;
+      }
+    }
+
+    this.setState({
+      shoppingCard: newCard
+    })
+  }
+
+  decreaseQ = (item) => {
+    if(item.quantity > 1) {
+      const newQuantity = item.quantity - 1;
+      let newCard = this.state.shoppingCard;
+
+      for(let i = 0; i < newCard.length; i++) {
+        if(newCard[i].id === item.id) {
+          newCard[i].quantity = newQuantity;
+        }
+      }
+
+      this.setState({
+        shoppingCard: newCard
+      })
+    }
   }
 
   render() {
     return (
       <section className="shop-content">
         <Product products={this.state.content} addItem={this.addItem} />
-        <Items items={this.state.shoppingCard} deleteItem={this.deleteItem} />
+        <Items items={this.state.shoppingCard} deleteItem={this.deleteItem} increaseQ={this.increaseQ} decreaseQ={this.decreaseQ}/>
       </section>
     );
   }

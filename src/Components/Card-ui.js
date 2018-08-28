@@ -20,9 +20,16 @@ class Card extends Component {
           <div className="card-content">
             <div>
               Item: {item.name}
-              <span className="delete-from-card" onClick={() => this.props.deleteItem(item.id)}><i class="fa fa-trash-alt"></i></span>
+              <span className="delete-from-card" onClick={() => this.props.deleteItem(item)}>
+                <i className="fa fa-trash-alt"></i>
+              </span>
             </div>
             <div>Price: {item.price + item.currency}</div>
+            <div className="quantity-container">
+              Quantity: <span onClick={() => this.props.decreaseQ(item)}>-</span>
+                {item.quantity}
+              <span onClick={() => this.props.increaseQ(item)}>+</span>
+            </div>
           </div>
         );
       });
