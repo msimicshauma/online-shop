@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Nav from './Components/Nav';
 import Products from './Components/Content-container';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Shipping from './Components/Pages/Shipping';
 import About from './Components/Pages/About';
 
-class App extends Component {
-  render() {
+const App = () => {
     return (
       <BrowserRouter>
         <div className="main-container">
@@ -17,7 +16,6 @@ class App extends Component {
         </div>
       </BrowserRouter>
     );
-  }
 }
 
 export default App;

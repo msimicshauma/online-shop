@@ -94,6 +94,7 @@ class Content extends Component {
   addItem = (item) => {
 
     item.quantity = 1;
+    item.total = item.price * item.quantity;
 
     if(item.clicks < 1) {
       const shoppingCard = [...this.state.shoppingCard, item];
@@ -104,7 +105,6 @@ class Content extends Component {
 
       item.clicks++;
     }
-
   }
 
   deleteItem = (item) => {
@@ -134,6 +134,8 @@ class Content extends Component {
     for(let i = 0; i < newCard.length; i++) {
       if(newCard[i].id === item.id) {
         newCard[i].quantity = newQuantity;
+        newCard[i].total = newCard[i].price * newCard[i].quantity;
+        console.log(newCard[i].total);
       }
     }
 
@@ -150,6 +152,8 @@ class Content extends Component {
       for(let i = 0; i < newCard.length; i++) {
         if(newCard[i].id === item.id) {
           newCard[i].quantity = newQuantity;
+          newCard[i].total -= newCard[i].price;
+          console.log(newCard[i].total);
         }
       }
 

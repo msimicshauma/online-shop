@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Card extends Component {
 
   state = {
-    showCart: false
+    showCart: false,
   }
 
   displayCart = () => {
@@ -12,8 +12,11 @@ class Card extends Component {
 
   render() {
 
+    var priceCheckoutContainer = "price-checkout-container";
+
     if(this.props.items.length < 1) {
-      var cardContent = <div className="card-content center">Cart is empty!</div>
+      var cardContent = <div className="card-content center">Cart is empty!</div>;
+      priceCheckoutContainer += " hiddenContainer";
     } else {
       cardContent = this.props.items.map(item => {
         return (
@@ -35,9 +38,17 @@ class Card extends Component {
       });
     }
 
+    var totalPrice = 0;
+    for(let i = 0; i < this.props.items.length; i++)
+      totalPrice += (this.props.items[i].price * this.props.items[i].quantity)
+
     var card = (
       <div className="card">
         {cardContent}
+        <div className={priceCheckoutContainer}>
+          Total price: {totalPrice}$
+          <div className="checkout-button">Checkout</div>
+        </div>
       </div>
     );
 
