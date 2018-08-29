@@ -17,7 +17,7 @@ class Card extends Component {
     } else {
       cardContent = this.props.items.map(item => {
         return (
-          <div className="card-content">
+          <div className="card-content" key={item.id}>
             <div>
               Item: {item.name}
               <span className="delete-from-card" onClick={() => this.props.deleteItem(item)}>
