@@ -42,6 +42,8 @@ class Card extends Component {
     for(let i = 0; i < this.props.items.length; i++)
       totalPrice += (this.props.items[i].price * this.props.items[i].quantity)
 
+    totalPrice = Math.round(totalPrice * 100) / 100
+
     var card = (
       <div className="card">
         {cardContent}

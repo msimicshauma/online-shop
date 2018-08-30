@@ -56,6 +56,8 @@ ul {
   font-size: 16px;
   background-color: var(--main-theme);
   color: var(--secondary-color);
+
+  user-select: none;
 }
 
 .main-container .nav-bar ul li {
@@ -122,6 +124,8 @@ ul {
   color: var(--secondary-color);
   background-color: var(--third-color);
   cursor: pointer;
+
+  user-select: none;
 }
 
 .main-container .shop-content .products-grid .product .add-to-card:hover {
@@ -157,6 +161,8 @@ ul {
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-delay: 0;
+
+  user-select: none;
 }
 
 @keyframes slideIn {
