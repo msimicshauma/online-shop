@@ -242,6 +242,8 @@ ul {
 
   transition-duration: 0.2s;
   transition-timing-function: linear;
+
+  user-select: none;
 }
 
 .main-container .shop-content .show-hide-card.hidden {

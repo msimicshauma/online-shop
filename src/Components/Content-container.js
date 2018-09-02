@@ -92,18 +92,24 @@ class Content extends Component {
   }
 
   addItem = (item) => {
+    let newItem = item;
+    let newContent = this.state.content;
 
-    item.quantity = 1;
-    item.total = item.price * item.quantity;
+    newItem.quantity = 1;
+    newItem.total = item.price * item.quantity;
 
     if(item.clicks < 1) {
-      const shoppingCard = [...this.state.shoppingCard, item];
+
+      const shoppingCard = [...this.state.shoppingCard, newItem];
+
+      for(let i = 0; i < newContent.length; i++)
+        if(newContent[i].id === item.id)
+          newContent[i].clicks = 1;
 
       this.setState({
+        content: newContent,
         shoppingCard
       })
-
-      item.clicks++;
     }
   }
 
@@ -111,19 +117,17 @@ class Content extends Component {
 
     let newContent = this.state.content;
 
-    for(let i = 0; i < newContent.length; i++) {
-      if(newContent[i].id === item.id) {
+    for(let i = 0; i < newContent.length; i++)
+      if(newContent[i].id === item.id)
         newContent[i].clicks = 0;
-      }
-    }
 
     const shoppingCard = this.state.shoppingCard.filter(mapItem => {
       return mapItem.id !== item.id
     });
 
     this.setState({
-      shoppingCard,
-      content: newContent
+      content: newContent,
+      shoppingCard
     })
   }
 
@@ -131,13 +135,11 @@ class Content extends Component {
     const newQuantity = item.quantity + 1;
     let newCard = this.state.shoppingCard;
 
-    for(let i = 0; i < newCard.length; i++) {
+    for(let i = 0; i < newCard.length; i++)
       if(newCard[i].id === item.id) {
         newCard[i].quantity = newQuantity;
         newCard[i].total = newCard[i].price * newCard[i].quantity;
-        console.log(newCard[i].total);
       }
-    }
 
     this.setState({
       shoppingCard: newCard
@@ -149,13 +151,11 @@ class Content extends Component {
       const newQuantity = item.quantity - 1;
       let newCard = this.state.shoppingCard;
 
-      for(let i = 0; i < newCard.length; i++) {
+      for(let i = 0; i < newCard.length; i++)
         if(newCard[i].id === item.id) {
           newCard[i].quantity = newQuantity;
           newCard[i].total -= newCard[i].price;
-          console.log(newCard[i].total);
         }
-      }
 
       this.setState({
         shoppingCard: newCard
